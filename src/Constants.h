@@ -11,8 +11,8 @@
 #define DOWN_BUTTON     10
 #define DEBOUNCE_TIME   50
 
-#define PRESSURE_BASE               102
-#define PRESSURE_CONVERSION_FACTOR  3.5
+#define PRESSURE_OFFSET             0.483
+#define DIVISOR_MPA_TO_PSI          6.895
 /*#define LCD_RS      12
 #define LCD_EN      11
 #define LCD_D4       5
@@ -28,7 +28,9 @@
 #define OFF_TIME_STATE      5
 #define PURGE_STATE         6
 #define SOLENOID_STATE      7
-#define STATE_COUNT         (SOLENOID_STATE + 1)     
+#define MAX_PUMP_STATE      8
+#define PUMP_ERROR_STATE    9
+#define STATE_COUNT         (PUMP_ERROR_STATE + 1)     
 
 #define DISPLAY_UPDATE_EVERY_X_MILLI    500
 
@@ -49,10 +51,12 @@
 #define SPRAY_ON_ADDR                   4
 #define SPRAY_OFF_ADDR_HIGH_BYTE        5
 #define SPRAY_OFF_ADDR_LOW_BYTE         6
+#define MAX_PUMP_ON_ADDR                7
 
-#define DEFAULT_VALUE_SYSTEM_STATE      true
-#define DEFAULT_VALUE_SPRAY_ON          1
-#define DEFAULT_VALUE_SPRAY_OFF         300
-#define DEFAULT_VALUE_PRESSURE_ON       80
-#define DEFAULT_VALUE_PRESSURE_OFF      100
+#define DEFAULT_VALUE_SYSTEM_STATE          true
+#define DEFAULT_VALUE_SPRAY_ON              1
+#define DEFAULT_VALUE_SPRAY_OFF             300
+#define DEFAULT_VALUE_PRESSURE_ON           80
+#define DEFAULT_VALUE_PRESSURE_OFF          100
+#define DEFAULT_MAX_PUMP_ON_TIME_IN_SECONDS 15
 #endif  //!__CONSTANTS__H__

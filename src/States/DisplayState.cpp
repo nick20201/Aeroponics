@@ -5,8 +5,8 @@
 using namespace StateMachine;
 
 const char Line1[]    = "Pressure %3d psi";
-const char Line2On[]  = "Spray in %3d(s) ";
-const char Line2Off[] = "Spray off %3d(s)";
+const char Line2On[]  = "Spray in %3d ";
+const char Line2Off[] = "Spray off %3d";
 
 DisplayState::DisplayState(Interfaces::IStateMachine* fsm, 
             Utils::Debounce* okButton,

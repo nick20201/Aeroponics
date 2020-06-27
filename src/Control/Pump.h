@@ -6,6 +6,7 @@
 namespace Interfaces
 {
     class IRepository;
+    class IStateMachine;
 }
 
 namespace Control
@@ -14,9 +15,15 @@ namespace Control
     {
         bool _lowPressureLatch;
         Interfaces::IRepository* _repo;
+        Interfaces::IStateMachine* _stateMachine;
         bool _switchedOff;
+        bool _currentState;
+        unsigned long _onTime;
+
+        void CheckOnTime(unsigned long now);
         public:
         Pump(Interfaces::IRepository* repo);
+        void Init(Interfaces::IStateMachine* stateMachine) { _stateMachine = stateMachine; }
         void Loop(unsigned long now);
         int GetPressure();
     };

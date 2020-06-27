@@ -19,6 +19,8 @@ void setup()
     solenoid = new Control::Solenoid(repository);
     provider = new Aeroponics::ServiceProvider(solenoid, pump, repository);
     display = new StateMachine::FSM(provider);
+
+    pump->Init(display);
 }
 
 void loop() 

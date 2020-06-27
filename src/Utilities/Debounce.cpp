@@ -11,7 +11,7 @@ Debounce::Debounce(int pin, int time) :
     _stateChangeInProgress(false),
     _callBackInvoked(false)
 {
-    pinMode(_pin, INPUT);
+    pinMode(_pin, INPUT_PULLUP);
 }
 
 void Debounce::Update()
@@ -19,10 +19,10 @@ void Debounce::Update()
     int state = digitalRead(_pin);
     unsigned long now = millis();
 
-    if (state == LOW && _callBackInvoked)
+    if (state == HIGH && _callBackInvoked)
         _callBackInvoked = false;
 
-    if (!_stateChangeInProgress && state == HIGH && !_callBackInvoked)
+    if (!_stateChangeInProgress && state == LOW && !_callBackInvoked)
     {
         _stateChangeInProgress = true;
         _lastStateChangeTime = now;
@@ -32,7 +32,7 @@ void Debounce::Update()
     {
         if ((_lastStateChangeTime + _debounceTime) < now)
         {           
-            if (state == HIGH && _callbackObject != NULL)       
+            if (state == LOW && _callbackObject != NULL)       
             {
                 _callBackInvoked = true;  
                 _callbackObject->ButtonPressedCallback(_pin);

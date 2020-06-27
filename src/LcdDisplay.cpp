@@ -20,7 +20,7 @@ void LcdDisplay::print(const char * msg)
 {
     Serial.print(millis());
     Serial.print(" length is ");
-    Serial.print(strlen(msg), 10);
+    Serial.print(strlen(msg));
     Serial.print(" LCD Print: ");
     Serial.println(msg);
     _lcd->print(msg);

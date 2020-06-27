@@ -16,6 +16,7 @@ Repository::Repository()
         _sprayOnTime = EEPROM.read(SPRAY_ON_ADDR);
         _sprayOffTime = EEPROM.read(SPRAY_OFF_ADDR_HIGH_BYTE) << 8;
         _sprayOffTime |= EEPROM.read(SPRAY_OFF_ADDR_LOW_BYTE);   
+        _maxPumpOnTimeInSeconds = EEPROM.read(MAX_PUMP_ON_ADDR);   
     }
     else
     {
@@ -23,7 +24,8 @@ Repository::Repository()
         SetPressureOn(DEFAULT_VALUE_PRESSURE_ON);
         SetSprayOffTime(DEFAULT_VALUE_SPRAY_OFF);
         SetSprayOnTime(DEFAULT_VALUE_SPRAY_ON);
-        SetSystemState(DEFAULT_VALUE_SYSTEM_STATE);               
+        SetSystemState(DEFAULT_VALUE_SYSTEM_STATE);  
+        SetPumpMaxRunTime(DEFAULT_MAX_PUMP_ON_TIME_IN_SECONDS);             
     }
 }
 
@@ -57,3 +59,9 @@ void Repository::SetSystemState(bool state)
     _systemState = state; 
     EEPROM.write(SYSTEM_ADDR, _systemState ? 1 : 0);    
 } 
+
+void Repository::SetPumpMaxRunTime(int maxPumpOnTimeInSeconds) 
+{ 
+    _maxPumpOnTimeInSeconds = maxPumpOnTimeInSeconds; 
+    EEPROM.write(MAX_PUMP_ON_ADDR, _maxPumpOnTimeInSeconds); 
+}  

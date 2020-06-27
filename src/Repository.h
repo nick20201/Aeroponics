@@ -11,6 +11,7 @@ namespace Aeroponics
         int _sprayOffTime;
         int _sprayOnTime;
         bool _systemState;
+        int _maxPumpOnTimeInSeconds;
 
         public:
         Repository();
@@ -29,6 +30,9 @@ namespace Aeroponics
 
         bool GetSystemState() { return _systemState; }
         void SetSystemState(bool state);
+
+        int GetPumpMaxRunTime() { return _maxPumpOnTimeInSeconds; };         
+        void SetPumpMaxRunTime(int maxPumpOnTimeInSeconds);    
     };
 }
 #endif  //!__REPOSITORY__H__

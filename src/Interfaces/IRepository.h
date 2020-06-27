@@ -20,6 +20,9 @@ namespace Interfaces
 
             virtual bool GetSystemState() = 0;         
             virtual void SetSystemState(bool state) = 0;
+
+            virtual int GetPumpMaxRunTime() = 0;         
+            virtual void SetPumpMaxRunTime(int state) = 0;
     };
 }
 #endif

@@ -11,6 +11,7 @@
 #include "./States/SolenoidState.h"
 #include "./States/MaxPumpOnTimeState.h"
 #include "./States/PumpErrorState.h"
+#include "./States/PumpStatsState.h"
 #include "./Utilities/Debounce.h"
 #include "Constants.h"
 
@@ -33,9 +34,10 @@ FSM::FSM(Interfaces::IServiceProvider* serviceProvider)
     _states[SOLENOID_STATE]     = new SolenoidOverrideState(this, _okButton, _leftButton, _rightButton, _upButton, _downButton, serviceProvider);
     _states[MAX_PUMP_STATE]     = new MaxPumpOnTimeState(this, _okButton, _leftButton, _rightButton, _upButton, _downButton, serviceProvider);
     _states[PUMP_ERROR_STATE]   = new PumpErrorState(this, _okButton, _leftButton, _rightButton, _upButton, _downButton, serviceProvider);
+    _states[PUMP_STATS_STATE]   = new PumpStatsState(this, _okButton, _leftButton, _rightButton, _upButton, _downButton, serviceProvider);
 
 
-    _currentState = _states[PUMP_ERROR_STATE];
+    _currentState = _states[DISPLAY_STATE];
     _currentState->EnterState();
 }
 

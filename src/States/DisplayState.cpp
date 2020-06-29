@@ -62,7 +62,7 @@ void DisplayState::ButtonPressedCallback(int id)
 {
     if (id == LEFT_BUTTON)
     {
-        _fsm->ChangeState(OFF_TIME_STATE);Serial.println("LEFT_BUTTON Button pressed");
+        _fsm->ChangeState(PUMP_STATS_STATE);Serial.println("LEFT_BUTTON Button pressed");
         return;
     }
 

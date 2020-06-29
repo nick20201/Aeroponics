@@ -39,15 +39,19 @@ void PumpErrorState::Loop(unsigned long now)
         _lcd->print("  PUMP ERROR");
         _lcd->setCursor(0, 1);
         _lcd->print("  OK to clear");
+        _lcd->backlight(true);
     }
     else
-        _lcd->clear();
+    {
+        _lcd->backlight(false);
+    }
 }
 
 void PumpErrorState::ButtonPressedCallback(int id)
 {
     if (id == OK_BUTTON) 
     {
-        _fsm->ChangeState(DISPLAY_STATE);
+        _lcd->backlight(true);
+        _fsm->ChangeState(SYSTEM_STATE);
     } 
 }

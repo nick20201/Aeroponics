@@ -47,7 +47,7 @@ void PressureOnState::ButtonPressedCallback(int id)
 {
     switch (id) 
     {
-        case UP_BUTTON:Serial.println(_newPressureOnValue);
+        case UP_BUTTON:
             _newPressureOnValue++;
             if (_newPressureOnValue >= _repo->GetPressureOff())
                 _newPressureOnValue--;        

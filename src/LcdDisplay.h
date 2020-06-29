@@ -17,6 +17,7 @@ namespace Aeroponics
         void print(const char * msg);
         void clear();
         void setCursor(int col, int row);
+        void backlight(bool state);
     };
 }
 #endif  //!__LCDDISPLAY__H__

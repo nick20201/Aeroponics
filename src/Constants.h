@@ -30,7 +30,8 @@
 #define SOLENOID_STATE      7
 #define MAX_PUMP_STATE      8
 #define PUMP_ERROR_STATE    9
-#define STATE_COUNT         (PUMP_ERROR_STATE + 1)     
+#define PUMP_STATS_STATE   10
+#define STATE_COUNT         (PUMP_STATS_STATE + 1)     
 
 #define DISPLAY_UPDATE_EVERY_X_MILLI    500
 

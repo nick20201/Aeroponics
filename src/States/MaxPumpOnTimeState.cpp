@@ -58,7 +58,7 @@ void MaxPumpOnTimeState::ButtonPressedCallback(int id)
             _fsm->ChangeState(OFF_TIME_STATE);
         break;
         case RIGHT_BUTTON:
-            _fsm->ChangeState(DISPLAY_STATE);
+            _fsm->ChangeState(PUMP_STATS_STATE);
         break;
         default://OK button
           _repo->SetPumpMaxRunTime(_maxPumpOnTime);

@@ -47,7 +47,6 @@ void SystemState::EnterState()
 void SystemState::LeaveState()
 {
     StateBase::LeaveState();
-    _repo->SetSystemState(true);
 }
 
 void SystemState::ButtonPressedCallback(int id)

@@ -29,11 +29,13 @@ void Pump::CheckOnTime(unsigned long now)
     if ((((unsigned long)_repo->GetPumpMaxRunTime() * 1000) + _onTime) < now)
     {
         //opps we have an error, this will require a reset
-        digitalWrite(PUMP_OUTPUT, LOW);
         _repo->SetSystemState(false);
+        SwitchPumpOff();
 
         if (_stateMachine != NULL)
-            _stateMachine->ChangeState(PUMP_ERROR_STATE);
+        {
+            _stateMachine->ChangeState(PUMP_ERROR_STATE);            
+        }
     }
 }
 
@@ -79,4 +81,15 @@ void Pump::Loop(unsigned long now)
             _onTime = 0;
         }
     }
+}
+
+void Pump::SwitchPumpOff()
+{
+    if (_currentState)
+    {
+        digitalWrite(PUMP_OUTPUT, LOW);
+        _currentState = false;
+        _onTime = 0;
+        _lowPressureLatch = false;
+    } 
 }

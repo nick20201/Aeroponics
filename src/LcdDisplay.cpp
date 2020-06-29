@@ -34,3 +34,11 @@ void LcdDisplay::setCursor(int col, int row)
 {
     _lcd->setCursor(col, row);
 }
+
+void LcdDisplay::backlight(bool state)
+{
+    if (state)
+        _lcd->backlight();
+    else
+        _lcd->noBacklight();  
+}

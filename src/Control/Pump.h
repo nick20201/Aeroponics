@@ -26,6 +26,7 @@ namespace Control
         void Init(Interfaces::IStateMachine* stateMachine) { _stateMachine = stateMachine; }
         void Loop(unsigned long now);
         int GetPressure();
+        void SwitchPumpOff();
     };
 }
 #endif  //!__PUMP__H__

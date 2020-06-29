@@ -8,7 +8,7 @@ namespace Interfaces
         public:
         virtual void Loop(unsigned long now) = 0;
         virtual int GetPressure() = 0;
-        virtual void SwitchPumpOff() = 0;
+        virtual void GetStats(unsigned long& time, unsigned long& occurences, unsigned long now) = 0;
     };
 }
 

@@ -25,6 +25,17 @@ void LcdDisplay::print(const char * msg)
     Serial.println(msg);
     _lcd->print(msg);
 }
+
+void LcdDisplay::print(unsigned long value)
+{
+    _lcd->print(value);
+}
+
+void LcdDisplay::print(int value)
+{
+    _lcd->print(value);
+}
+
 void LcdDisplay::clear()
 {
     _lcd->clear();

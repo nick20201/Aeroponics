@@ -7,8 +7,6 @@ namespace StateMachine
 {
     class PumpStatsState : public StateBase
     {
-        bool _displayOn;
-        unsigned long _laststateChange;
         public:
         PumpStatsState(Interfaces::IStateMachine* fsm,
             Utils::Debounce* okButton,

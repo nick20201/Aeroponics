@@ -16,6 +16,7 @@ Solenoid::Solenoid(Interfaces::IRepository* repo) :
     _overrideOn(false)
 {
     pinMode(SOLENOID_OUTPUT, OUTPUT);
+    digitalWrite(SOLENOID_OUTPUT, LOW);
 }
 
 int Solenoid::GetTimeUntilSpray(int& on, int& off)

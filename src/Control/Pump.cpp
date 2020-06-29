@@ -11,7 +11,10 @@ Pump::Pump(Interfaces::IRepository* repo) :
     _switchedOff(false),
     _lowPressureLatch(false),
     _currentState(false),
-    _stateMachine(NULL)
+    _stateMachine(NULL),
+    _totalOnTime(0),
+    _startTime(0),
+    _onOccurence(0)
 {
     pinMode(PUMP_OUTPUT, OUTPUT);
 }
@@ -30,7 +33,7 @@ void Pump::CheckOnTime(unsigned long now)
     {
         //opps we have an error, this will require a reset
         _repo->SetSystemState(false);
-        SwitchPumpOff();
+        SwitchPumpState(false, now);
 
         if (_stateMachine != NULL)
         {
@@ -44,7 +47,7 @@ void Pump::Loop(unsigned long now)
     bool systemState = _repo->GetSystemState();
     if (!systemState && !_switchedOff)
     {
-        digitalWrite(PUMP_OUTPUT, LOW);
+        SwitchPumpState(false, now);
         _switchedOff = true;
     }
 
@@ -66,9 +69,7 @@ void Pump::Loop(unsigned long now)
     {
         if (!_currentState)
         {
-    	    digitalWrite(PUMP_OUTPUT, HIGH);
-            _currentState = true;
-            _onTime = now;
+    	    SwitchPumpState(true, now);
         }
         CheckOnTime(now);
     }
@@ -76,20 +77,36 @@ void Pump::Loop(unsigned long now)
     {
         if (_currentState)
         {
-            digitalWrite(PUMP_OUTPUT, LOW);
-            _currentState = false;
-            _onTime = 0;
+            SwitchPumpState(false, now);  
         }
     }
 }
 
-void Pump::SwitchPumpOff()
+void Pump::GetStats(unsigned long& time, unsigned long& occurences, unsigned long now)
 {
+    time = _totalOnTime;
+    occurences = _onOccurence;
     if (_currentState)
+        time +=  ((now - _startTime) / 1000);
+}
+
+void Pump::SwitchPumpState(bool state, unsigned long now)
+{
+    if (_currentState && !state)
     {
         digitalWrite(PUMP_OUTPUT, LOW);
         _currentState = false;
+        _totalOnTime += (now - _startTime) / 1000;
+        _startTime = 0;
         _onTime = 0;
-        _lowPressureLatch = false;
-    } 
+    }
+
+    if (!_currentState && state)
+    {
+        digitalWrite(PUMP_OUTPUT, HIGH);
+        _onOccurence++;
+        _startTime = now;
+        _currentState = true;
+        _onTime = now;
+    }    
 }

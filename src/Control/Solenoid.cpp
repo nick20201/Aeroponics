@@ -16,7 +16,7 @@ Solenoid::Solenoid(Interfaces::IRepository* repo) :
     _overrideOn(false)
 {
     pinMode(SOLENOID_OUTPUT, OUTPUT);
-    digitalWrite(SOLENOID_OUTPUT, LOW);
+    digitalWrite(SOLENOID_OUTPUT, HIGH);
 }
 
 int Solenoid::GetTimeUntilSpray(int& on, int& off)
@@ -32,7 +32,8 @@ int Solenoid::GetTimeUntilSpray(int& on, int& off)
 void Solenoid::SetState(bool state)
 {
     _overrideOn = state;
-    digitalWrite(SOLENOID_OUTPUT, state ? HIGH : LOW);
+    digitalWrite(SOLENOID_OUTPUT, state ? LOW : HIGH);
+    Serial.println("Change solenoid state");
 }
 
 void Solenoid::Loop(unsigned long now)
@@ -40,7 +41,7 @@ void Solenoid::Loop(unsigned long now)
     bool systemState = _repo->GetSystemState();
     if (!systemState && !_switchedOff)
     {
-        digitalWrite(SOLENOID_OUTPUT, LOW);
+        digitalWrite(SOLENOID_OUTPUT, HIGH);
         _switchedOff = true;
     }
 
@@ -60,7 +61,7 @@ void Solenoid::Loop(unsigned long now)
             _state = true;
             if (!_switchedOff && !_overrideOn)
             {            
-                digitalWrite(SOLENOID_OUTPUT, HIGH);
+                digitalWrite(SOLENOID_OUTPUT, LOW);
             }
             _elapseTime = 0;            
         }        
@@ -75,7 +76,7 @@ void Solenoid::Loop(unsigned long now)
             _state = false;
             if (!_switchedOff && !_overrideOn)
             { 
-                digitalWrite(SOLENOID_OUTPUT, LOW);
+                digitalWrite(SOLENOID_OUTPUT, HIGH);
             }
             _elapseTime = 0;            
         }      

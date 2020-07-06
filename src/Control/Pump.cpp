@@ -94,7 +94,7 @@ void Pump::SwitchPumpState(bool state, unsigned long now)
 {
     if (_currentState && !state)
     {
-        digitalWrite(PUMP_OUTPUT, LOW);
+        digitalWrite(PUMP_OUTPUT, HIGH);
         _currentState = false;
         _totalOnTime += (now - _startTime) / 1000;
         _startTime = 0;
@@ -103,7 +103,7 @@ void Pump::SwitchPumpState(bool state, unsigned long now)
 
     if (!_currentState && state)
     {
-        digitalWrite(PUMP_OUTPUT, HIGH);
+        digitalWrite(PUMP_OUTPUT, LOW);
         _onOccurence++;
         _startTime = now;
         _currentState = true;

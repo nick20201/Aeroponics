@@ -56,6 +56,8 @@ void DisplayState::EnterState()
     _rightButton->SetCallback(this);
 
     _lastDisplayTime = millis() - DISPLAY_UPDATE_EVERY_X_MILLI;
+
+    clear();
 }
 
 void DisplayState::ButtonPressedCallback(int id)

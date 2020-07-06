@@ -20,6 +20,7 @@ Repository::Repository()
     }
     else
     {
+        EEPROM.write(MAGIC_NUMBER_ADDR, MAGIC_NUMBER);
         SetPressureOff(DEFAULT_VALUE_PRESSURE_OFF);
         SetPressureOn(DEFAULT_VALUE_PRESSURE_ON);
         SetSprayOffTime(DEFAULT_VALUE_SPRAY_OFF);

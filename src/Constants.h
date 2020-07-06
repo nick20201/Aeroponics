@@ -3,7 +3,8 @@
 
 #define PUMP_OUTPUT                     11
 #define SOLENOID_OUTPUT                 12
-#define PRESSURE_SENSOR                 A0 
+#define PURGE_OUTPUT                    13
+#define PRESSURE_SENSOR                 A6 
 #define OK_BUTTON       6
 #define LEFT_BUTTON     7
 #define RIGHT_BUTTON    8

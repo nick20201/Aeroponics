@@ -17,6 +17,7 @@ Pump::Pump(Interfaces::IRepository* repo) :
     _onOccurence(0)
 {
     pinMode(PUMP_OUTPUT, OUTPUT);
+    digitalWrite(PUMP_OUTPUT, HIGH);
 }
 
 int Pump::GetPressure()
